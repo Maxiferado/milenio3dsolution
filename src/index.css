@@ -11,3 +11,8 @@
 html {
   scroll-behavior: smooth;
 }
+
+@keyframes cubeSpin {
+  0%   { transform: rotateX(-25deg) rotateY(45deg); }
+  100% { transform: rotateX(-25deg) rotateY(405deg); }
+}
