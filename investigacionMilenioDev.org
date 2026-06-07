@@ -1,0 +1,149 @@
+#+TITLE: Investigación Técnica - Proyecto Milenio
+#+AUTHOR: Claude Code
+#+DATE: 2026-05-15
+#+OPTIONS: toc:t num:t
+
+* Descripción del Proyecto
+
+Landing page para cliente Milenio. La página es informativa y además incluye un *configurador 3D interactivo* donde los usuarios pueden:
+
+1. Seleccionar un espacio (modelo a escala hecho por arquitecto)
+2. Aplicar materiales/texturas del catálogo del cliente mediante drag & drop
+3. Ver el costo calculado automáticamente (m² × precio del material)
+4. Exportar la cotización enviando una foto del modelo y el desglose de precios por WhatsApp
+
+* Evaluación de Tecnologías 3D
+
+** Unity WebGL — Descartado
+
+- *Problema principal:* Bundle inicial de 20–50 MB antes de renderizar nada
+- Impacto negativo en conversión de la landing page
+- Comunicación Unity ↔ web mediante puente JavaScript, difícil de mantener
+- Actualizaciones requieren rebuild y redeploy independiente del resto del sitio
+
+** Babylon.js — Opción válida pero no óptima
+
+- Tiene ejemplos reales de room planners (3dhouseplanner.com, room-editor en GitHub)
+- Excelente rendimiento para escenas complejas
+- *Desventaja:* Integración con React no es nativa; el configurador y la landing quedan desacoplados
+
+** React Three Fiber (R3F) — *RECOMENDADO*
+
+- Three.js escrito como componentes React nativos
+- Ecosistema activo con casos de uso idénticos al proyecto (configuradores con texturas)
+- Existe curso específico de configuradores con R3F: https://threejsresources.com/tool/react-three-fiber-configurator-course
+- Paquetes clave disponibles: =@react-three/drei=, =@react-three/rapier=
+
+* Stack Técnico Propuesto
+
+| Capa             | Tecnología                                                       |
+|------------------+------------------------------------------------------------------|
+| Framework        | Next.js 14+ (App Router)                                         |
+| Motor 3D         | React Three Fiber + @react-three/drei                            |
+| Estado / carrito | Zustand                                                          |
+| Estilos          | Tailwind CSS                                                     |
+| Screenshot       | Canvas nativo Three.js (=gl.domElement.toDataURL()=)             |
+| WhatsApp         | Twilio WhatsApp API (API Route Next.js)                          |
+| Modelos 3D       | Formato =.glb= / =.gltf= (el arquitecto exporta en este formato) |
+
+* Flujo del Configurador
+
+1. Usuario entra al configurador 3D (sección dentro de la landing)
+2. Carga el modelo a escala del espacio (archivo =.glb=)
+3. Panel lateral muestra el catálogo de materiales del cliente (pisos, paredes, revestimientos)
+4. Drag & drop del material sobre la superficie → textura aplicada en tiempo real
+5. Sistema calcula: =m² de superficie × precio del material=
+6. Botón "Cotizar" → captura screenshot del canvas 3D → abre WhatsApp con imagen y desglose de precios
+
+* Pendientes del Cliente (Antes de Arrancar)
+
+- [ ] Modelos 3D de los espacios en formato =.glb= o =.obj= (del arquitecto)
+- [ ] Catálogo de materiales/texturas en imágenes de alta resolución (=.jpg= / =.png=)
+- [ ] Precio por m² de cada material
+- [ ] Número de WhatsApp Business para recibir cotizaciones
+- [ ] Brief de diseño visual de la landing (colores, tipografía, copy, secciones)
+
+* Fuentes de Investigación
+
+- [[https://github.com/pmndrs/react-three-fiber][React Three Fiber - GitHub]]
+- [[https://threejsresources.com/tool/react-three-fiber-configurator-course][React Three Fiber Configurator Course]]
+- [[https://github.com/mykongee/room-editor][Babylon.js Room Editor - GitHub]]
+- [[https://ilogos.biz/unity-to-webgl-porting-guide/][Unity to WebGL Porting Guide 2026]]
+- [[https://discussions.unity.com/t/eliots-webgl-notes-for-2026/1701530][Unity WebGL Performance Notes 2026]]
+- [[https://doc.babylonjs.com/guidedLearning/workshop/House][Babylon.js - Build a House from Plans (Docs)]]
+
+* Paginas que van a estar en la pagina  
+
+* Inicio  
+
+** Diferencial : entra dentro del segmento de la construccion en acabados visuales
+
+** Pintura blanca y arriba tien piedra, el producto es netamente estetico, y es para la gente que quiere un remate visual que se vea natural y armonizo 
+
+** es netamente natural y tiene unas vetas muy lindas
+
+** la comercial que son tonos grises, linea media tonos claros y tonos exclusivos que ya son colores muy raros que pareceiera que fuera echo en fabrica pero, es totalmente natural 
+
+** Se intala la piedra a mano remate visual asia la naturaleza  
+
+** Envejecimiento de la piedra, con el tiempo se empiza a despegar.
+
+** Ingeniero quimico, se esta haciendo con un ingeniero 
+
+** Siempre recomiendo usar el pego de los azulejos de las picisinas   
+
+* Inicio / nudo / desenlace 
+
+** inicio 
+
+*** Un producto 100 % no tiene proceso, de la extraccion de la materia  a la fachada de tu casa, para conservar la naturalidad en tus fachadas,  
+
+*** Construye tu fachada  
+
+*** catalogo de productos 
+
+*** Mescla de tonos como convinar estos productos con estos colores mensaje tecnico. (SE escalara en el futuro a casos de exito)
+
+*** Construye tu fachada   
+
+*** Tener numero y correo para escalabilidad 
+
+*** Nudo 
+
+*** Manual de instalacion 
+
+*** Estrato 3.7 a 6 
+
+** nudo 
+
+*** Construye tu fachada  
+  
+*** termina de construir la fachada, mandamos foto por correo para obter correo, y la informacion del producto que compro llega whatsapp 
+
+*** Le vamos a dar la foto directamente al correo con mensaje insparador para obtener esa fachada que sueñas , motivacional, inspirador 
+
+** desenlace
+
+*** Ir a whatsapp
+
+** Filtros  
+
+*** FIltros para generar, generar cartoon o low polly para generar como un efecto de juguete, hiperrealismo, empresarial y de venta 
+
+*** es mejor llegar con los render para llegar al hiper realismo, Referenia piedra laja la piedra en la fochada la instalasion un detello interno muchos mas estetico  
+
+*** Es llegar lo mas cercano a los productos, desde el comprado. que la pagina le llegue al comprador, un render que un modelo, no se va a ver asi de realista.     
+
+*** Yo entiendo lo que se tiene en la reunion, el diferenciador. No tenemos ese banco de imagenes, lina tiene razon 
+
+*** Diego nos den especificacione y referencias, concepto arquitectonico y espacios que se van a usar  
+
+*** Ese catalogo de fotografias de cada una de las texturas que se van a poner y se pueden iniciar  
+
+*** Cuando tengamos, el pago el tiempo, sacar esas texturas   
+
+*** Para las texturas  
+
+*** Tenemos pendientes y el pago   
+
+*** Tengo que hacer el minimo producto viable  
